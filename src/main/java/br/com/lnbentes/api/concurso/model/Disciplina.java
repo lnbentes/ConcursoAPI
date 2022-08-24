@@ -50,6 +50,14 @@ public class Disciplina{
         this.nome = nome;
     }
 
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
     public List<Questao> getQuestao() {
         return questao;
     }

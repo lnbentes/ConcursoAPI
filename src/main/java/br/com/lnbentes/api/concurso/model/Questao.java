@@ -23,6 +23,12 @@ public class Questao{
    @NotNull
    private double peso;
 
+   @NotNull
+   private String data;
+
+   @NotNull
+   private double pesoData;
+
    @ManyToOne
    @JsonIgnoreProperties("questao")
    private Banca banca;
@@ -38,10 +44,6 @@ public class Questao{
    @ManyToOne
    @JsonIgnoreProperties("questao")
    private Topico topico;
-
-   @ManyToOne
-   @JsonIgnoreProperties("questao")
-   private String data;
 
    @ManyToOne
    @JsonIgnoreProperties("questao")
@@ -100,6 +102,14 @@ public class Questao{
 
    public void setData(String data) {
       this.data = data;
+   }
+
+   public double getPesoData() {
+      return pesoData;
+   }
+
+   public void setPesoData(double pesoData) {
+      this.pesoData = pesoData;
    }
 
    public double getPeso() {
