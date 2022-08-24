@@ -18,9 +18,7 @@ public class Questao{
    @NotNull
    private boolean resposta;
    @NotNull
-   private String respostaExplicacao;
-   @NotNull
-   private String data;
+   private String explicacao;
 
    @NotNull
    private double peso;
@@ -41,16 +39,27 @@ public class Questao{
    @JsonIgnoreProperties("questao")
    private Topico topico;
 
+   @ManyToOne
+   @JsonIgnoreProperties("questao")
+   private String data;
+
+   @ManyToOne
+   @JsonIgnoreProperties("questao")
+   private String areaDeConhecimento;
+
+   @ManyToOne
+   @JsonIgnoreProperties("questao")
+   private String orgao;
+
 
    public Questao() {
    }
 
-   public Questao(Long id, String descricao, boolean resposta, String respostaExplicacao, String data) {
+   public Questao(Long id, String descricao, boolean resposta, String explicacao) {
       this.id = id;
       this.descricao = descricao;
       this.resposta = resposta;
-      this.respostaExplicacao = respostaExplicacao;
-      this.data = data;
+      this.explicacao = explicacao;
    }
 
    public Long getId() {
@@ -77,12 +86,12 @@ public class Questao{
       this.resposta = resposta;
    }
 
-   public String getRespostaExplicacao() {
-      return respostaExplicacao;
+   public String getExplicacao() {
+      return explicacao;
    }
 
-   public void setRespostaExplicacao(String respostaExplicacao) {
-      this.respostaExplicacao = respostaExplicacao;
+   public void setExplicacao(String explicacao) {
+      this.explicacao = explicacao;
    }
 
    public String getData() {
@@ -131,5 +140,21 @@ public class Questao{
 
    public void setTopico(Topico topico) {
       this.topico = topico;
+   }
+
+   public String getAreaDeConhecimento() {
+      return areaDeConhecimento;
+   }
+
+   public void setAreaDeConhecimento(String areaDeConhecimento) {
+      this.areaDeConhecimento = areaDeConhecimento;
+   }
+
+   public String getOrgao() {
+      return orgao;
+   }
+
+   public void setOrgao(String orgao) {
+      this.orgao = orgao;
    }
 }

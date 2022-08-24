@@ -24,6 +24,15 @@ public class Topico{
     @JsonIgnoreProperties("topico")
     private List<Questao> questao;
 
+    public Topico() {
+    }
+
+    public Topico(Long id, String nome, double peso) {
+        this.id = id;
+        this.nome = nome;
+        this.peso = peso;
+    }
+
     public Long getId() {
         return id;
     }

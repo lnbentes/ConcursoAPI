@@ -24,6 +24,16 @@ public class Disciplina{
     @JsonIgnoreProperties("disciplina")
     private List<Questao> questao;
 
+    public Disciplina() {
+
+    }
+
+    public Disciplina(Long id, String nome, double peso) {
+        this.id = id;
+        this.nome = nome;
+        this.peso = peso;
+    }
+
     public Long getId() {
         return id;
     }

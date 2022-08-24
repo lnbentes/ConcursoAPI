@@ -24,6 +24,15 @@ public class Banca{
     @JsonIgnoreProperties("banca")
     private List<Questao> questao;
 
+    public Banca() {
+    }
+
+    public Banca(Long id, String nome, double peso) {
+        this.id = id;
+        this.nome = nome;
+        this.peso = peso;
+    }
+
     public Long getId() {
         return id;
     }
