@@ -1,4 +1,4 @@
-package br.com.lucasbentes.api.concurso;
+package br.com.lnbentes.api.concurso;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package br.com.lucasbentes.api.concurso.model;
+package br.com.lnbentes.api.concurso.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;

@@ -1,6 +1,6 @@
-package br.com.lucasbentes.api.concurso.repository;
+package br.com.lnbentes.api.concurso.repository;
 
-import br.com.lucasbentes.api.concurso.model.Banca;
+import br.com.lnbentes.api.concurso.model.Banca;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

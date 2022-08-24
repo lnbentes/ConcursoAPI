@@ -1,4 +1,4 @@
-package br.com.lucasbentes.api.concurso.exceptions;
+package br.com.lnbentes.api.concurso.exceptions;
 
 import java.io.Serializable;
 import java.util.Date;

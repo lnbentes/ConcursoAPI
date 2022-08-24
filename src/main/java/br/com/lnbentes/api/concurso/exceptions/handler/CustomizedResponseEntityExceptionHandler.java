@@ -1,7 +1,7 @@
-package br.com.lucasbentes.api.concurso.exceptions.handler;
+package br.com.lnbentes.api.concurso.exceptions.handler;
 
-import br.com.lucasbentes.api.concurso.exceptions.ExceptionResponse;
-import br.com.lucasbentes.api.concurso.exceptions.ResourceNotFoundException;
+import br.com.lnbentes.api.concurso.exceptions.ExceptionResponse;
+import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

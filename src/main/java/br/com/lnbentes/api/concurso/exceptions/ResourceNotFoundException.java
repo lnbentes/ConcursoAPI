@@ -1,4 +1,4 @@
-package br.com.lucasbentes.api.concurso.exceptions;
+package br.com.lnbentes.api.concurso.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

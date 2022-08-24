@@ -1,4 +1,4 @@
-package br.com.lucasbentes.api.concurso.model;
+package br.com.lnbentes.api.concurso.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_topico")
-public class Topico{
+@Table(name = "tb_assunto")
+public class Assunto{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,14 +20,14 @@ public class Topico{
     @NotNull
     private double peso;
 
-    @OneToMany(mappedBy = "topico", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("topico")
+    @OneToMany(mappedBy = "assunto", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("assunto")
     private List<Questao> questao;
 
-    public Topico() {
-    }
+    public Assunto() {
 
-    public Topico(Long id, String nome, double peso) {
+    }
+    public Assunto(Long id, String nome, double peso) {
         this.id = id;
         this.nome = nome;
         this.peso = peso;
@@ -64,4 +64,5 @@ public class Topico{
     public void setQuestao(List<Questao> questao) {
         this.questao = questao;
     }
+
 }
