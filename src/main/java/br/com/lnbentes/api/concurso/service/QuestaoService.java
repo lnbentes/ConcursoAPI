@@ -45,6 +45,12 @@ public class QuestaoService {
         entity.setPeso(questao.getPeso());
         entity.setData(questao.getData());
         entity.setPesoData(questao.getPesoData());
+        entity.setBanca(questao.getBanca());
+        entity.setDisciplina(questao.getDisciplina());
+        entity.setAssunto(questao.getAssunto());
+        entity.setTopico(questao.getTopico());
+        entity.setOrgao(questao.getOrgao());
+        entity.setAreaDeConhecimento(questao.getAreaDeConhecimento());
         return repository.save(entity);
     }
 

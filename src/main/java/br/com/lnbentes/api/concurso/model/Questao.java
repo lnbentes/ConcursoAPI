@@ -47,11 +47,11 @@ public class Questao{
 
    @ManyToOne
    @JsonIgnoreProperties("questao")
-   private String areaDeConhecimento;
+   private AreaDeConhecimento areaDeConhecimento;
 
    @ManyToOne
    @JsonIgnoreProperties("questao")
-   private String orgao;
+   private Orgao orgao;
 
 
    public Questao() {
@@ -152,19 +152,19 @@ public class Questao{
       this.topico = topico;
    }
 
-   public String getAreaDeConhecimento() {
+   public AreaDeConhecimento getAreaDeConhecimento() {
       return areaDeConhecimento;
    }
 
-   public void setAreaDeConhecimento(String areaDeConhecimento) {
+   public void setAreaDeConhecimento(AreaDeConhecimento areaDeConhecimento) {
       this.areaDeConhecimento = areaDeConhecimento;
    }
 
-   public String getOrgao() {
+   public Orgao getOrgao() {
       return orgao;
    }
 
-   public void setOrgao(String orgao) {
+   public void setOrgao(Orgao orgao) {
       this.orgao = orgao;
    }
 }
