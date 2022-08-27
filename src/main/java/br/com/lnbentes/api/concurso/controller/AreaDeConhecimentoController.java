@@ -1,48 +1,55 @@
 package br.com.lnbentes.api.concurso.controller;
 
-import br.com.lnbentes.api.concurso.model.Questao;
-import br.com.lnbentes.api.concurso.service.QuestaoService;
+import br.com.lnbentes.api.concurso.model.AreaDeConhecimento;
+import br.com.lnbentes.api.concurso.service.AreaDeConhecimentoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/questao")
-@Tag(name = "Questão", description = "Endpoints para gerenciar as questões")
-public class QuestaoController {
+@RequestMapping("/conhecimento")
+@Tag(name = "Área de Conhecimento", description = "Endpoints para gerenciar as áreas de Conhecimento")
+public class AreaDeConhecimentoController {
 
     @Autowired
-    private QuestaoService service;
+    private AreaDeConhecimentoService service;
 
     @RequestMapping(method= RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Questao> findAll(){
+    public List<AreaDeConhecimento> findAll(){
         return service.findAll();
     }
 
     @RequestMapping(value = "/{id}",
             method=RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Questao findById(@PathVariable(value = "id") Long id){
+    public AreaDeConhecimento findById(@PathVariable(value = "id") Long id){
         return service.findById(id);
     }
 
+    @RequestMapping(value = "/nome/{nome}",
+            method=RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Optional<AreaDeConhecimento> findByNome(@PathVariable(value = "nome") String nome){
+        return service.findByNome(nome);
+    }
 
     @RequestMapping(method=RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Questao post(@RequestBody Questao questao){
-        return service.create(questao);
+    public AreaDeConhecimento post(@RequestBody AreaDeConhecimento areaDeConhecimento){
+        return service.create(areaDeConhecimento);
     }
 
     @RequestMapping(method=RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Questao put(@RequestBody Questao questao){
-        return service.update(questao);
+    public AreaDeConhecimento put(@RequestBody AreaDeConhecimento areaDeConhecimento){
+        return service.update(areaDeConhecimento);
     }
 
     @RequestMapping(value = "/{id}",

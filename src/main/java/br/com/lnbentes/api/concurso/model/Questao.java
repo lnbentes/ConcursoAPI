@@ -24,7 +24,7 @@ public class Questao{
    private double peso;
 
    @NotNull
-   private String data;
+   private String ano;
 
    @NotNull
    private double pesoData;
@@ -43,7 +43,8 @@ public class Questao{
 
    @ManyToOne
    @JsonIgnoreProperties("questao")
-   private Topico topico;
+   private SubTopico subTopico;
+
 
    @ManyToOne
    @JsonIgnoreProperties("questao")
@@ -52,6 +53,10 @@ public class Questao{
    @ManyToOne
    @JsonIgnoreProperties("questao")
    private Orgao orgao;
+
+   @ManyToOne
+   @JsonIgnoreProperties("questao")
+   private Cargo cargo;
 
 
    public Questao() {
@@ -96,12 +101,12 @@ public class Questao{
       this.explicacao = explicacao;
    }
 
-   public String getData() {
-      return data;
+   public String getAno() {
+      return ano;
    }
 
-   public void setData(String data) {
-      this.data = data;
+   public void setAno(String ano) {
+      this.ano = ano;
    }
 
    public double getPesoData() {
@@ -144,12 +149,13 @@ public class Questao{
       this.assunto = assunto;
    }
 
-   public Topico getTopico() {
-      return topico;
+
+   public SubTopico getSubTopico() {
+      return subTopico;
    }
 
-   public void setTopico(Topico topico) {
-      this.topico = topico;
+   public void setSubTopico(SubTopico subTopico) {
+      this.subTopico = subTopico;
    }
 
    public AreaDeConhecimento getAreaDeConhecimento() {
@@ -166,5 +172,13 @@ public class Questao{
 
    public void setOrgao(Orgao orgao) {
       this.orgao = orgao;
+   }
+
+   public Cargo getCargo() {
+      return cargo;
+   }
+
+   public void setCargo(Cargo cargo) {
+      this.cargo = cargo;
    }
 }

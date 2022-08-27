@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_topico")
-public class Topico{
+@Table(name = "tb_cargo")
+public class Cargo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,14 +20,14 @@ public class Topico{
     @NotNull
     private double peso;
 
-    @OneToMany(mappedBy = "topico", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("topico")
-    private List<SubTopico> subTopicos;
+    @OneToMany(mappedBy = "orgao", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("orgao")
+    private List<Questao> questao;
 
-    public Topico() {
+    public Cargo() {
     }
 
-    public Topico(Long id, String nome, double peso) {
+    public Cargo(Long id, String nome, double peso) {
         this.id = id;
         this.nome = nome;
         this.peso = peso;
@@ -57,11 +57,11 @@ public class Topico{
         this.peso = peso;
     }
 
-    public List<SubTopico> getSubTopicos() {
-        return subTopicos;
+    public List<Questao> getQuestao() {
+        return questao;
     }
 
-    public void setSubTopicos(List<SubTopico> subTopicos) {
-        this.subTopicos = subTopicos;
+    public void setQuestao(List<Questao> questao) {
+        this.questao = questao;
     }
 }

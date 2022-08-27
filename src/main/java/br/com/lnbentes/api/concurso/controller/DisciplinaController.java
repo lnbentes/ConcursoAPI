@@ -1,48 +1,57 @@
 package br.com.lnbentes.api.concurso.controller;
 
-import br.com.lnbentes.api.concurso.model.Questao;
-import br.com.lnbentes.api.concurso.service.QuestaoService;
+
+import br.com.lnbentes.api.concurso.model.Assunto;
+import br.com.lnbentes.api.concurso.model.Disciplina;
+import br.com.lnbentes.api.concurso.service.DisciplinaService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/questao")
-@Tag(name = "Questão", description = "Endpoints para gerenciar as questões")
-public class QuestaoController {
+@RequestMapping("/disciplina")
+@Tag(name = "Disciplina", description = "Endpoints para gerenciar as disciplinas")
+public class DisciplinaController {
 
     @Autowired
-    private QuestaoService service;
+    private DisciplinaService service;
 
     @RequestMapping(method= RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Questao> findAll(){
+    public List<Disciplina> findAll(){
         return service.findAll();
     }
 
     @RequestMapping(value = "/{id}",
             method=RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Questao findById(@PathVariable(value = "id") Long id){
+    public Disciplina findById(@PathVariable(value = "id") Long id){
         return service.findById(id);
     }
 
+    @RequestMapping(value = "/nome/{nome}",
+            method=RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Optional<Disciplina> findByNome(@PathVariable(value = "nome") String nome){
+        return service.findByNome(nome);
+    }
 
     @RequestMapping(method=RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Questao post(@RequestBody Questao questao){
-        return service.create(questao);
+    public Disciplina post(@RequestBody Disciplina disciplina){
+        return service.create(disciplina);
     }
 
     @RequestMapping(method=RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Questao put(@RequestBody Questao questao){
-        return service.update(questao);
+    public Disciplina put(@RequestBody Disciplina disciplina){
+        return service.update(disciplina);
     }
 
     @RequestMapping(value = "/{id}",

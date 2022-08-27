@@ -1,8 +1,8 @@
 package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
-import br.com.lnbentes.api.concurso.model.Assunto;
-import br.com.lnbentes.api.concurso.repository.AssuntoRepository;
+import br.com.lnbentes.api.concurso.model.Cargo;
+import br.com.lnbentes.api.concurso.repository.CargoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,48 +11,48 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
-public class AssuntoService {
+public class CargoService {
 
     @Autowired
-    private AssuntoRepository repository;
+    private CargoRepository repository;
 
     private Logger logger = Logger.getLogger(QuestaoService.class.getName());
 
-    public List<Assunto> findAll(){
-        logger.info("Localizando todas os assuntos!");
+    public List<Cargo> findAll(){
+        logger.info("Localizando todas os tópicos!");
         return repository.findAll();
     }
 
-    public Assunto findById(Long id){
-        logger.info("Localizando uma assunto!");
+    public Cargo findById(Long id){
+        logger.info("Localizando um tópico!");
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
     }
 
-    public Optional<Assunto> findByNome(String nome){
-        logger.info("Localizando nome do assunto!");
+    public Optional<Cargo> findByNome(String nome){
+        logger.info("Localizando nome do tópico!");
         return repository.findByNomeContainingIgnoreCase(nome);
     }
 
-    public Assunto create(Assunto assunto) {
-        logger.info("Criando um assunto!");
-        return repository.save(assunto);
+    public Cargo create(Cargo cargo) {
+        logger.info("Criando um tópico!");
+        return repository.save(cargo);
     }
 
-    public Assunto update(Assunto assunto) {
-        logger.info("Atualizando um assunto!");
+    public Cargo update(Cargo cargo) {
+        logger.info("Atualizando o tópico!");
 
-        Assunto entity = repository.findById(assunto.getId())
+        Cargo entity = repository.findById(cargo.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
 
-        entity.setNome(assunto.getNome());
-        entity.setPeso(assunto.getPeso());
+        entity.setNome(cargo.getNome());
+        entity.setPeso(cargo.getPeso());
         return repository.save(entity);
     }
 
     public void delete(Long id) {
-        logger.info("Deletando um áassunto!");
-        Assunto entity = repository.findById(id)
+        logger.info("Deletando o tópico!");
+        Cargo entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
 
         repository.delete(entity);

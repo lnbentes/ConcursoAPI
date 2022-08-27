@@ -1,7 +1,6 @@
 package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
-import br.com.lnbentes.api.concurso.model.Assunto;
 import br.com.lnbentes.api.concurso.model.Banca;
 import br.com.lnbentes.api.concurso.repository.BancaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

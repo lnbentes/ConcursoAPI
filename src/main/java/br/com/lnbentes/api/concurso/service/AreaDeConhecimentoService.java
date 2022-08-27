@@ -2,7 +2,6 @@ package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
 import br.com.lnbentes.api.concurso.model.AreaDeConhecimento;
-import br.com.lnbentes.api.concurso.model.Disciplina;
 import br.com.lnbentes.api.concurso.model.Questao;
 import br.com.lnbentes.api.concurso.repository.AreaDeConhecimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

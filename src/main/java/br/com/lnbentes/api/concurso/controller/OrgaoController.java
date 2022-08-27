@@ -1,48 +1,56 @@
 package br.com.lnbentes.api.concurso.controller;
 
-import br.com.lnbentes.api.concurso.model.Questao;
-import br.com.lnbentes.api.concurso.service.QuestaoService;
+import br.com.lnbentes.api.concurso.model.Banca;
+import br.com.lnbentes.api.concurso.model.Orgao;
+import br.com.lnbentes.api.concurso.service.OrgaoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/questao")
-@Tag(name = "Questão", description = "Endpoints para gerenciar as questões")
-public class QuestaoController {
+@RequestMapping("/orgao")
+@Tag(name = "Orgão", description = "Endpoints para gerenciar os orgões")
+public class OrgaoController {
 
     @Autowired
-    private QuestaoService service;
+    private OrgaoService service;
 
     @RequestMapping(method= RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Questao> findAll(){
+    public List<Orgao> findAll(){
         return service.findAll();
     }
 
     @RequestMapping(value = "/{id}",
             method=RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Questao findById(@PathVariable(value = "id") Long id){
+    public Orgao findById(@PathVariable(value = "id") Long id){
         return service.findById(id);
     }
 
+    @RequestMapping(value = "/nome/{nome}",
+            method=RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Optional<Orgao> findByNome(@PathVariable(value = "nome") String nome){
+        return service.findByNome(nome);
+    }
 
     @RequestMapping(method=RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Questao post(@RequestBody Questao questao){
-        return service.create(questao);
+    public Orgao post(@RequestBody Orgao orgao){
+        return service.create(orgao);
     }
 
     @RequestMapping(method=RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Questao put(@RequestBody Questao questao){
-        return service.update(questao);
+    public Orgao put(@RequestBody Orgao orgao){
+        return service.update(orgao);
     }
 
     @RequestMapping(value = "/{id}",
