@@ -22,6 +22,7 @@ public class Topico{
 
     @OneToMany(mappedBy = "topico", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("topico")
+    @Column(name = "sub_topico")
     private List<SubTopico> subTopicos;
 
     public Topico() {

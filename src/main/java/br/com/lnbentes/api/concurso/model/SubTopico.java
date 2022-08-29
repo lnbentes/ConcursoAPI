@@ -21,7 +21,7 @@ public class SubTopico {
     private double peso;
 
     @ManyToOne
-    @JsonIgnoreProperties("subTopico")
+    @JsonIgnoreProperties("subTopicos")
     private Topico topico;
 
     @OneToMany(mappedBy = "subTopico", cascade = CascadeType.REMOVE)

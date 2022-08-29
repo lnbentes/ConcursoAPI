@@ -14,6 +14,8 @@ public class Questao{
    private Long id;
 
    @NotNull
+   private String titulo;
+   @NotNull
    private String descricao;
    @NotNull
    private boolean resposta;
@@ -27,6 +29,7 @@ public class Questao{
    private String ano;
 
    @NotNull
+   @Column(name = "peso_data")
    private double pesoData;
 
    @ManyToOne
@@ -43,11 +46,13 @@ public class Questao{
 
    @ManyToOne
    @JsonIgnoreProperties("questao")
+//   @Column(name = "sub_topico")
    private SubTopico subTopico;
 
 
    @ManyToOne
    @JsonIgnoreProperties("questao")
+//   @Column(name = "area_de_conhecimento")
    private AreaDeConhecimento areaDeConhecimento;
 
    @ManyToOne
@@ -75,6 +80,14 @@ public class Questao{
 
    public void setId(Long id) {
       this.id = id;
+   }
+
+   public String getTitulo() {
+      return titulo;
+   }
+
+   public void setTitulo(String titulo) {
+      this.titulo = titulo;
    }
 
    public String getDescricao() {
