@@ -22,7 +22,7 @@ public class Disciplina{
 
     @OneToMany(mappedBy = "disciplina", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("disciplina")
-    private List<Questao> questao;
+    private List<Assunto> assuntos;
 
     public Disciplina() {
 
@@ -58,12 +58,11 @@ public class Disciplina{
         this.peso = peso;
     }
 
-    public List<Questao> getQuestao() {
-        return questao;
+    public List<Assunto> getAssuntos() {
+        return assuntos;
     }
 
-    public void setQuestao(List<Questao> questao) {
-        this.questao = questao;
+    public void setAssuntos(List<Assunto> assuntos) {
+        this.assuntos = assuntos;
     }
-
 }

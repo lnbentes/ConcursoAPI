@@ -1,6 +1,6 @@
 package br.com.lnbentes.api.concurso.controller;
 
-import br.com.lnbentes.api.concurso.model.Banca;
+import br.com.lnbentes.api.concurso.model.NomeModel;
 import br.com.lnbentes.api.concurso.model.Topico;
 import br.com.lnbentes.api.concurso.service.TopicoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,6 +30,13 @@ public class TopicoController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Topico findById(@PathVariable(value = "id") Long id){
         return service.findById(id);
+    }
+
+    @RequestMapping(value = "/nome",
+            method=RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<NomeModel> getAllNome(){
+        return service.getAllName();
     }
 
     @RequestMapping(value = "/nome/{nome}",

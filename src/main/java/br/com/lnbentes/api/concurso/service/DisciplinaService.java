@@ -2,10 +2,12 @@ package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
 import br.com.lnbentes.api.concurso.model.Disciplina;
+import br.com.lnbentes.api.concurso.model.NomeModel;
 import br.com.lnbentes.api.concurso.repository.DisciplinaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -28,6 +30,20 @@ public class DisciplinaService {
         logger.info("Localizando uma disciplina!");
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
+    }
+
+    public List<NomeModel> getAllName(){
+        List<Disciplina> topicos = repository.findAll();
+        NomeModel nome = new NomeModel();
+        List<NomeModel> nomes = new ArrayList<>();
+
+        for (Disciplina disciplina : topicos) {
+            nome.setNome(disciplina.getNome());
+            nome.setPeso(disciplina.getPeso());
+            nomes.add(nome);
+        }
+
+        return nomes;
     }
 
     public Optional<Disciplina> findByNome(String nome){

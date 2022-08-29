@@ -1,11 +1,13 @@
 package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
+import br.com.lnbentes.api.concurso.model.NomeModel;
 import br.com.lnbentes.api.concurso.model.SubTopico;
 import br.com.lnbentes.api.concurso.repository.SubTopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -27,6 +29,20 @@ public class SubTopicoService {
         logger.info("Localizando um tópico!");
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
+    }
+
+    public List<NomeModel> getAllName(){
+        List<SubTopico> topicos = repository.findAll();
+        NomeModel nome = new NomeModel();
+        List<NomeModel> nomes = new ArrayList<>();
+
+        for (SubTopico subTopico : topicos) {
+            nome.setNome(subTopico.getNome());
+            nome.setPeso(subTopico.getPeso());
+            nomes.add(nome);
+        }
+
+        return nomes;
     }
 
     public Optional<SubTopico> findByNome(String nome){

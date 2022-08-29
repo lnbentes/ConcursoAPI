@@ -2,6 +2,7 @@ package br.com.lnbentes.api.concurso.controller;
 
 import br.com.lnbentes.api.concurso.model.AreaDeConhecimento;
 import br.com.lnbentes.api.concurso.model.Assunto;
+import br.com.lnbentes.api.concurso.model.NomeModel;
 import br.com.lnbentes.api.concurso.service.AreaDeConhecimentoService;
 import br.com.lnbentes.api.concurso.service.AssuntoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,6 +32,13 @@ public class AssuntoController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Assunto findById(@PathVariable(value = "id") Long id){
         return service.findById(id);
+    }
+
+    @RequestMapping(value = "/nome",
+            method=RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<NomeModel> getAllNome(){
+        return service.getAllName();
     }
 
     @RequestMapping(value = "/nome/{nome}",

@@ -1,11 +1,13 @@
 package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
+import br.com.lnbentes.api.concurso.model.NomeModel;
 import br.com.lnbentes.api.concurso.model.Orgao;
 import br.com.lnbentes.api.concurso.repository.OrgaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -27,6 +29,20 @@ public class OrgaoService {
         logger.info("Localizando um órgão!");
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
+    }
+
+    public List<NomeModel> getAllName(){
+        List<Orgao> topicos = repository.findAll();
+        NomeModel nome = new NomeModel();
+        List<NomeModel> nomes = new ArrayList<>();
+
+        for (Orgao orgao : topicos) {
+            nome.setNome(orgao.getNome());
+            nome.setPeso(orgao.getPeso());
+            nomes.add(nome);
+        }
+
+        return nomes;
     }
 
     public Optional<Orgao> findByNome(String nome){

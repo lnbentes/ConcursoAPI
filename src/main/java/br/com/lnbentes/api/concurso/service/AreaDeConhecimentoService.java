@@ -2,11 +2,13 @@ package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
 import br.com.lnbentes.api.concurso.model.AreaDeConhecimento;
+import br.com.lnbentes.api.concurso.model.NomeModel;
 import br.com.lnbentes.api.concurso.model.Questao;
 import br.com.lnbentes.api.concurso.repository.AreaDeConhecimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -28,6 +30,20 @@ public class AreaDeConhecimentoService {
         logger.info("Localizando uma área de Conhecimento!");
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
+    }
+
+    public List<NomeModel> getAllName(){
+        List<AreaDeConhecimento> topicos = repository.findAll();
+        NomeModel nome = new NomeModel();
+        List<NomeModel> nomes = new ArrayList<>();
+
+        for (AreaDeConhecimento areaDeConhecimento : topicos) {
+            nome.setNome(areaDeConhecimento.getNome());
+            nome.setPeso(areaDeConhecimento.getPeso());
+            nomes.add(nome);
+        }
+
+        return nomes;
     }
 
     public Optional<AreaDeConhecimento> findByNome(String nome){

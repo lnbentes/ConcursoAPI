@@ -20,6 +20,10 @@ public class Topico{
     @NotNull
     private double peso;
 
+    @ManyToOne
+    @JsonIgnoreProperties("topicos")
+    private Assunto assunto;
+
     @OneToMany(mappedBy = "topico", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("topico")
     @Column(name = "sub_topico")

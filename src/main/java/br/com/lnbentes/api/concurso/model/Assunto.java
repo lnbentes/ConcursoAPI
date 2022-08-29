@@ -20,9 +20,14 @@ public class Assunto{
     @NotNull
     private double peso;
 
+    @ManyToOne
+    @JsonIgnoreProperties("assuntos")
+    private Disciplina disciplina;
+
     @OneToMany(mappedBy = "assunto", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("assunto")
-    private List<Questao> questao;
+    @Column(name = "assunto")
+    private List<Topico> topicos;
 
     public Assunto() {
 
@@ -57,12 +62,19 @@ public class Assunto{
         this.peso = peso;
     }
 
-    public List<Questao> getQuestao() {
-        return questao;
+    public Disciplina getDisciplina() {
+        return disciplina;
     }
 
-    public void setQuestao(List<Questao> questao) {
-        this.questao = questao;
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 
+    public List<Topico> getTopicos() {
+        return topicos;
+    }
+
+    public void setTopicos(List<Topico> topicos) {
+        this.topicos = topicos;
+    }
 }

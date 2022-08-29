@@ -2,10 +2,12 @@ package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
 import br.com.lnbentes.api.concurso.model.Banca;
+import br.com.lnbentes.api.concurso.model.NomeModel;
 import br.com.lnbentes.api.concurso.repository.BancaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -26,6 +28,20 @@ public class BancaService {
         logger.info("Localizando uma área de Conhecimento!");
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
+    }
+
+    public List<NomeModel> getAllName(){
+        List<Banca> topicos = repository.findAll();
+        NomeModel nome = new NomeModel();
+        List<NomeModel> nomes = new ArrayList<>();
+
+        for (Banca banca : topicos) {
+            nome.setNome(banca.getNome());
+            nome.setPeso(banca.getPeso());
+            nomes.add(nome);
+        }
+
+        return nomes;
     }
 
     public Optional<Banca> findByNome(String nome){

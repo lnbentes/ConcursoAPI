@@ -2,10 +2,12 @@ package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
 import br.com.lnbentes.api.concurso.model.Cargo;
+import br.com.lnbentes.api.concurso.model.NomeModel;
 import br.com.lnbentes.api.concurso.repository.CargoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -27,6 +29,20 @@ public class CargoService {
         logger.info("Localizando um tópico!");
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
+    }
+
+    public List<NomeModel> getAllName(){
+        List<Cargo> topicos = repository.findAll();
+        NomeModel nome = new NomeModel();
+        List<NomeModel> nomes = new ArrayList<>();
+
+        for (Cargo cargo : topicos) {
+            nome.setNome(cargo.getNome());
+            nome.setPeso(cargo.getPeso());
+            nomes.add(nome);
+        }
+
+        return nomes;
     }
 
     public Optional<Cargo> findByNome(String nome){
