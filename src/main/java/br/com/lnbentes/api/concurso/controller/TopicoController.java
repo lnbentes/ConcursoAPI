@@ -46,6 +46,13 @@ public class TopicoController {
         return service.findByNome(nome);
     }
 
+    @RequestMapping(value = "/nome/{nome}/sub_topico",
+            method=RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<NomeModel> getAllTopicosNomes(@PathVariable(value = "nome") String nome){
+        return service.getAllSubTopicosNomes(nome);
+    }
+
     @RequestMapping(method=RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)

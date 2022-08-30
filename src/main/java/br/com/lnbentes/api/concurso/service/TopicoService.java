@@ -1,7 +1,9 @@
 package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
+import br.com.lnbentes.api.concurso.model.Assunto;
 import br.com.lnbentes.api.concurso.model.NomeModel;
+import br.com.lnbentes.api.concurso.model.SubTopico;
 import br.com.lnbentes.api.concurso.model.Topico;
 import br.com.lnbentes.api.concurso.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,10 @@ public class TopicoService {
     @Autowired
     private TopicoRepository repository;
 
+    private List<Topico> topicos;
+    private List<NomeModel> nomes;
+    private NomeModel nome;
+
     private Logger logger = Logger.getLogger(QuestaoService.class.getName());
 
     public List<Topico> findAll(){
@@ -32,23 +38,40 @@ public class TopicoService {
     }
 
     public List<NomeModel> getAllName(){
-        List<Topico> topicos = repository.findAll();
-        List<NomeModel> nomes = new ArrayList<>();
+        this.topicos = repository.findAll();
+        this.nomes = new ArrayList<>();
 
         for (Topico topico : topicos) {
-            NomeModel nome = new NomeModel();
-            nome.setId(topico.getId());
-            nome.setNome(topico.getNome());
-            nome.setPeso(topico.getPeso());
-            nomes.add(nome);
+            this.nome = new NomeModel();
+            this.nome.setId(topico.getId());
+            this.nome.setNome(topico.getNome());
+            this.nome.setPeso(topico.getPeso());
+            this.nomes.add(nome);
         }
 
-        return nomes;
+        return this.nomes;
     }
 
     public Optional<Topico> findByNome(String nome){
         logger.info("Localizando nome do tópico!");
         return repository.findByNomeContainingIgnoreCase(nome);
+    }
+
+    /*
+     * Pega o nome do topico e retorna uma lista com todos os nomes dos subTopicos relacionados.
+     * */
+    public List<NomeModel> getAllSubTopicosNomes(String nomeAssunto){
+        Optional<Topico> topico = repository.findByNomeContainingIgnoreCase(nomeAssunto);
+        this.nomes = new ArrayList<>();
+
+        for(SubTopico subTopico : topico.get().getSubTopicos()){
+            this.nome = new NomeModel();
+            this.nome.setId(subTopico.getId());
+            this.nome.setNome(subTopico.getNome());
+            this.nome.setPeso(subTopico.getPeso());
+            this.nomes.add(nome);
+        }
+        return this.nomes;
     }
 
     public Topico create(Topico topico) {

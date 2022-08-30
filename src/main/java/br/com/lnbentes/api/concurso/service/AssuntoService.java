@@ -3,6 +3,7 @@ package br.com.lnbentes.api.concurso.service;
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
 import br.com.lnbentes.api.concurso.model.Assunto;
 import br.com.lnbentes.api.concurso.model.NomeModel;
+import br.com.lnbentes.api.concurso.model.Topico;
 import br.com.lnbentes.api.concurso.repository.AssuntoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,10 @@ public class AssuntoService {
     @Autowired
     private AssuntoRepository repository;
 
+    private List<Assunto> assuntos;
+    private List<NomeModel> nomes;
+    private NomeModel nome;
+
     private Logger logger = Logger.getLogger(QuestaoService.class.getName());
 
     public List<Assunto> findAll(){
@@ -31,24 +36,43 @@ public class AssuntoService {
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
     }
 
+    /*
+     * Retorna uma lista com todos os nomes de assuntos registrados.
+     * */
     public List<NomeModel> getAllName(){
-        List<Assunto> topicos = repository.findAll();
-        List<NomeModel> nomes = new ArrayList<>();
+        this.assuntos = repository.findAll();
+        this.nomes = new ArrayList<>();
 
-        for (Assunto assunto : topicos) {
-            NomeModel nome = new NomeModel();
-            nome.setId(assunto.getId());
-            nome.setNome(assunto.getNome());
-            nome.setPeso(assunto.getPeso());
-            nomes.add(nome);
+        for (Assunto assunto : assuntos) {
+            this.nome = new NomeModel();
+            this.nome.setId(assunto.getId());
+            this.nome.setNome(assunto.getNome());
+            this.nome.setPeso(assunto.getPeso());
+            this.nomes.add(nome);
         }
-
-        return nomes;
+        return this.nomes;
     }
 
     public Optional<Assunto> findByNome(String nome){
         logger.info("Localizando nome do assunto!");
         return repository.findByNomeContainingIgnoreCase(nome);
+    }
+
+    /*
+     * Pega o nome do assunto e retorna uma lista com todos os nomes dos topicos relacionados.
+     * */
+    public List<NomeModel> getAllTopicosNomes(String nomeAssunto){
+        Optional<Assunto> assunto = repository.findByNomeContainingIgnoreCase(nomeAssunto);
+        this.nomes = new ArrayList<>();
+
+        for(Topico topico : assunto.get().getTopicos()){
+            this.nome = new NomeModel();
+            this.nome.setId(topico.getId());
+            this.nome.setNome(topico.getNome());
+            this.nome.setPeso(topico.getPeso());
+            this.nomes.add(nome);
+        }
+        return this.nomes;
     }
 
     public Assunto create(Assunto assunto) {

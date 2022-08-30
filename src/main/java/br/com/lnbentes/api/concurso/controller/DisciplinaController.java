@@ -48,6 +48,13 @@ public class DisciplinaController {
         return service.findByNome(nome);
     }
 
+    @RequestMapping(value = "/nome/{nome}/assunto",
+            method=RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<NomeModel> getAllTopicosNomes(@PathVariable(value = "nome") String nome){
+        return service.getAllAssuntosNomes(nome);
+    }
+
     @RequestMapping(method=RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)

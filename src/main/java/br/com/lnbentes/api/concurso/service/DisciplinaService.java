@@ -1,6 +1,7 @@
 package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
+import br.com.lnbentes.api.concurso.model.Assunto;
 import br.com.lnbentes.api.concurso.model.Disciplina;
 import br.com.lnbentes.api.concurso.model.NomeModel;
 import br.com.lnbentes.api.concurso.repository.DisciplinaRepository;
@@ -18,6 +19,10 @@ public class DisciplinaService {
     @Autowired
     private DisciplinaRepository repository;
 
+    private List<Disciplina> disciplinas;
+    private List<NomeModel> nomes;
+    private NomeModel nome;
+
     private Logger logger = Logger.getLogger(QuestaoService.class.getName());
 
 
@@ -33,23 +38,40 @@ public class DisciplinaService {
     }
 
     public List<NomeModel> getAllName(){
-        List<Disciplina> topicos = repository.findAll();
-        List<NomeModel> nomes = new ArrayList<>();
+        disciplinas = repository.findAll();
+        nomes = new ArrayList<>();
 
-        for (Disciplina disciplina : topicos) {
-            NomeModel nome = new NomeModel();
-            nome.setId(disciplina.getId());
-            nome.setNome(disciplina.getNome());
-            nome.setPeso(disciplina.getPeso());
-            nomes.add(nome);
+        for (Disciplina disciplina : disciplinas) {
+            this.nome = new NomeModel();
+            this.nome.setId(disciplina.getId());
+            this.nome.setNome(disciplina.getNome());
+            this.nome.setPeso(disciplina.getPeso());
+            this.nomes.add(nome);
         }
 
-        return nomes;
+        return this.nomes;
     }
 
     public Optional<Disciplina> findByNome(String nome){
         logger.info("Localizando nome da disciplina!");
         return repository.findByNomeContainingIgnoreCase(nome);
+    }
+
+    /*
+     * Pega o nome de uma Disciplina e retorna uma lista com todos os nomes dos assuntos relacionados.
+     * */
+    public List<NomeModel> getAllAssuntosNomes(String nomeAssunto){
+        Optional<Disciplina> disciplina = repository.findByNomeContainingIgnoreCase(nomeAssunto);
+        this.nomes = new ArrayList<>();
+
+        for(Assunto assunto : disciplina.get().getAssuntos()){
+            this.nome = new NomeModel();
+            this.nome.setId(assunto.getId());
+            this.nome.setNome(assunto.getNome());
+            this.nome.setPeso(assunto.getPeso());
+            this.nomes.add(nome);
+        }
+        return this.nomes;
     }
 
     public Disciplina create(Disciplina disciplina) {
