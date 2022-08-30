@@ -1,6 +1,7 @@
 package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
+import br.com.lnbentes.api.concurso.model.AtributosBasicos;
 import br.com.lnbentes.api.concurso.model.NomeModel;
 import br.com.lnbentes.api.concurso.model.SubTopico;
 import br.com.lnbentes.api.concurso.repository.SubTopicoRepository;
@@ -13,7 +14,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
-public class SubTopicoService {
+public class SubTopicoService{
 
     @Autowired
     private SubTopicoRepository repository;
@@ -33,10 +34,11 @@ public class SubTopicoService {
 
     public List<NomeModel> getAllName(){
         List<SubTopico> topicos = repository.findAll();
-        NomeModel nome = new NomeModel();
         List<NomeModel> nomes = new ArrayList<>();
 
         for (SubTopico subTopico : topicos) {
+            NomeModel nome = new NomeModel();
+            nome.setId(subTopico.getId());
             nome.setNome(subTopico.getNome());
             nome.setPeso(subTopico.getPeso());
             nomes.add(nome);

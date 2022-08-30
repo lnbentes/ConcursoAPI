@@ -7,18 +7,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@PrimaryKeyJoinColumn(name="id")
 @Table(name = "tb_topico")
-public class Topico{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotNull
-    private String nome;
-
-    @NotNull
-    private double peso;
+public class Topico extends AtributosBasicos {
 
     @ManyToOne
     @JsonIgnoreProperties("topicos")
@@ -26,40 +17,23 @@ public class Topico{
 
     @OneToMany(mappedBy = "topico", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("topico")
-    @Column(name = "sub_topico")
     private List<SubTopico> subTopicos;
 
     public Topico() {
     }
 
     public Topico(Long id, String nome, double peso) {
-        this.id = id;
-        this.nome = nome;
-        this.peso = peso;
+        super.setId(id);
+        super.setNome(nome);
+        super.setPeso(peso);
     }
 
-    public Long getId() {
-        return id;
+    public Assunto getAssunto() {
+        return assunto;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public double getPeso() {
-        return peso;
-    }
-
-    public void setPeso(double peso) {
-        this.peso = peso;
+    public void setAssunto(Assunto assunto) {
+        this.assunto = assunto;
     }
 
     public List<SubTopico> getSubTopicos() {

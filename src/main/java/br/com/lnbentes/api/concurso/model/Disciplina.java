@@ -7,18 +7,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@PrimaryKeyJoinColumn(name="id")
 @Table(name = "tb_disciplina")
-public class Disciplina{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotNull
-    private String nome;
-
-    @NotNull
-    private double peso;
+public class Disciplina extends AtributosBasicos {
 
     @OneToMany(mappedBy = "disciplina", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("disciplina")
@@ -29,33 +20,9 @@ public class Disciplina{
     }
 
     public Disciplina(Long id, String nome, double peso) {
-        this.id = id;
-        this.nome = nome;
-        this.peso = peso;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public double getPeso() {
-        return peso;
-    }
-
-    public void setPeso(double peso) {
-        this.peso = peso;
+        super.setId(id);
+        super.setNome(nome);
+        super.setPeso(peso);
     }
 
     public List<Assunto> getAssuntos() {

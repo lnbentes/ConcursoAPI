@@ -34,10 +34,11 @@ public class DisciplinaService {
 
     public List<NomeModel> getAllName(){
         List<Disciplina> topicos = repository.findAll();
-        NomeModel nome = new NomeModel();
         List<NomeModel> nomes = new ArrayList<>();
 
         for (Disciplina disciplina : topicos) {
+            NomeModel nome = new NomeModel();
+            nome.setId(disciplina.getId());
             nome.setNome(disciplina.getNome());
             nome.setPeso(disciplina.getPeso());
             nomes.add(nome);

@@ -34,10 +34,11 @@ public class AreaDeConhecimentoService {
 
     public List<NomeModel> getAllName(){
         List<AreaDeConhecimento> topicos = repository.findAll();
-        NomeModel nome = new NomeModel();
         List<NomeModel> nomes = new ArrayList<>();
 
         for (AreaDeConhecimento areaDeConhecimento : topicos) {
+            NomeModel nome = new NomeModel();
+            nome.setId(areaDeConhecimento.getId());
             nome.setNome(areaDeConhecimento.getNome());
             nome.setPeso(areaDeConhecimento.getPeso());
             nomes.add(nome);

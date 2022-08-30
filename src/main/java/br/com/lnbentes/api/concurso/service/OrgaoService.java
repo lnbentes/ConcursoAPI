@@ -33,10 +33,11 @@ public class OrgaoService {
 
     public List<NomeModel> getAllName(){
         List<Orgao> topicos = repository.findAll();
-        NomeModel nome = new NomeModel();
         List<NomeModel> nomes = new ArrayList<>();
 
         for (Orgao orgao : topicos) {
+            NomeModel nome = new NomeModel();
+            nome.setId(orgao.getId());
             nome.setNome(orgao.getNome());
             nome.setPeso(orgao.getPeso());
             nomes.add(nome);

@@ -33,10 +33,11 @@ public class TopicoService {
 
     public List<NomeModel> getAllName(){
         List<Topico> topicos = repository.findAll();
-        NomeModel nome = new NomeModel();
         List<NomeModel> nomes = new ArrayList<>();
 
         for (Topico topico : topicos) {
+            NomeModel nome = new NomeModel();
+            nome.setId(topico.getId());
             nome.setNome(topico.getNome());
             nome.setPeso(topico.getPeso());
             nomes.add(nome);

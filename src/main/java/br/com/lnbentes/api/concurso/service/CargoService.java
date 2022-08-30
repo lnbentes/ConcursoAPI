@@ -33,10 +33,11 @@ public class CargoService {
 
     public List<NomeModel> getAllName(){
         List<Cargo> topicos = repository.findAll();
-        NomeModel nome = new NomeModel();
         List<NomeModel> nomes = new ArrayList<>();
 
         for (Cargo cargo : topicos) {
+            NomeModel nome = new NomeModel();
+            nome.setId(cargo.getId());
             nome.setNome(cargo.getNome());
             nome.setPeso(cargo.getPeso());
             nomes.add(nome);

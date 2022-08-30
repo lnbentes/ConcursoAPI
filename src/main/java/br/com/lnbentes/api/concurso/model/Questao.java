@@ -38,15 +38,6 @@ public class Questao{
 
    @ManyToOne
    @JsonIgnoreProperties("questao")
-   private Disciplina disciplina;
-
-   @ManyToOne
-   @JsonIgnoreProperties("questao")
-   private Assunto assunto;
-
-   @ManyToOne
-   @JsonIgnoreProperties("questao")
-//   @Column(name = "sub_topico")
    private SubTopico subTopico;
 
 
@@ -145,23 +136,6 @@ public class Questao{
    public void setBanca(Banca banca) {
       this.banca = banca;
    }
-
-   public Disciplina getDisciplina() {
-      return disciplina;
-   }
-
-   public void setDisciplina(Disciplina diciplina) {
-      this.disciplina = diciplina;
-   }
-
-   public Assunto getAssunto() {
-      return assunto;
-   }
-
-   public void setAssunto(Assunto assunto) {
-      this.assunto = assunto;
-   }
-
 
    public SubTopico getSubTopico() {
       return subTopico;
