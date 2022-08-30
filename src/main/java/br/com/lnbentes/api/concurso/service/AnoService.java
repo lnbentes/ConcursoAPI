@@ -1,9 +1,9 @@
 package br.com.lnbentes.api.concurso.service;
 
 import br.com.lnbentes.api.concurso.exceptions.ResourceNotFoundException;
+import br.com.lnbentes.api.concurso.model.Ano;
 import br.com.lnbentes.api.concurso.model.NomeModel;
-import br.com.lnbentes.api.concurso.model.Orgao;
-import br.com.lnbentes.api.concurso.repository.OrgaoRepository;
+import br.com.lnbentes.api.concurso.repository.AnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,64 +13,63 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
-public class OrgaoService {
-
+public class AnoService {
     @Autowired
-    private OrgaoRepository repository;
+    private AnoRepository repository;
 
     private Logger logger = Logger.getLogger(QuestaoService.class.getName());
 
-    public List<Orgao> findAll(){
-        logger.info("Localizando todas os órgãos!");
+    public List<Ano> findAll(){
+        logger.info("Localizando todas os anos!");
         return repository.findAll();
     }
 
-    public Orgao findById(Long id){
-        logger.info("Localizando um órgão!");
+    public Ano findById(Long id){
+        logger.info("Localizando um ano!");
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
     }
 
     public List<NomeModel> getAllName(){
-        logger.info("Localizando todos os nomes dos órgãos!");
-        List<Orgao> orgaos = repository.findAll();
+        logger.info("Localizando todas os nomes dos anos!");
+        List<Ano> anos = repository.findAll();
         List<NomeModel> nomes = new ArrayList<>();
 
-        for (Orgao orgao : orgaos) {
+        for (Ano ano : anos) {
             NomeModel nome = new NomeModel();
-            nome.setId(orgao.getId());
-            nome.setNome(orgao.getNome());
-            nome.setPeso(orgao.getPeso());
+            nome.setId(ano.getId());
+            nome.setNome(ano.getNome());
+            nome.setPeso(ano.getPeso());
             nomes.add(nome);
         }
 
         return nomes;
     }
 
-    public Optional<Orgao> findByNome(String nome){
-        logger.info("Localizando nome do órgão!");
+    public Optional<Ano> findByNome(String nome){
+        logger.info("Localizando nome do ano!");
         return repository.findByNomeContainingIgnoreCase(nome);
     }
 
-    public Orgao create(Orgao orgao) {
-        logger.info("Criando um órgão!");
-        return repository.save(orgao);
+    public Ano create(Ano ano) {
+        logger.info("Criando um ano!");
+        return repository.save(ano);
     }
 
-    public Orgao update(Orgao orgao) {
-        logger.info("Atualizando um órgão!");
+    public Ano update(Ano ano) {
+        logger.info("Atualizando um ano!");
 
-        Orgao entity = repository.findById(orgao.getId())
+        Ano entity = repository.findById(ano.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
 
-        entity.setNome(orgao.getNome());
-        entity.setPeso(orgao.getPeso());
+        entity.setNome(ano.getNome());
+        entity.setPeso(ano.getPeso());
         return repository.save(entity);
     }
 
     public void delete(Long id) {
-        logger.info("Deletando um órgão!");
-        Orgao entity = repository.findById(id)
+        logger.info("Deletando um ano!");
+        Ano entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
 
         repository.delete(entity);

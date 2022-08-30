@@ -1,62 +1,63 @@
 package br.com.lnbentes.api.concurso.controller;
 
-import br.com.lnbentes.api.concurso.model.Questao;
-import br.com.lnbentes.api.concurso.service.QuestaoService;
+import br.com.lnbentes.api.concurso.model.Ano;
+import br.com.lnbentes.api.concurso.model.NomeModel;
+import br.com.lnbentes.api.concurso.model.Orgao;
+import br.com.lnbentes.api.concurso.service.AnoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/questao")
-@Tag(name = "Questão", description = "Endpoints para gerenciar as questões")
-public class QuestaoController {
-
+@RequestMapping("/ano")
+@Tag(name = "Ano", description = "Endpoints para gerenciar os anos")
+public class AnoController {
     @Autowired
-    private QuestaoService service;
+    private AnoService service;
 
     @RequestMapping(method= RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Questao> findAll(){
+    public List<Ano> findAll(){
         return service.findAll();
     }
 
     @RequestMapping(value = "/{id}",
             method=RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Questao findById(@PathVariable(value = "id") Long id){
+    public Ano findById(@PathVariable(value = "id") Long id){
         return service.findById(id);
     }
 
-    @RequestMapping(value = "/sortear",
+    @RequestMapping(value = "/nome",
             method=RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Questao> cincoQuestoes(){
-        return service.sortearCincoQuestoes();
+    public List<NomeModel> getAllNome(){
+        return service.getAllName();
     }
 
-    @RequestMapping(value = "/sortear/{numero}",
+    @RequestMapping(value = "/nome/{nome}",
             method=RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Questao> sortearNVezes(@PathVariable(value = "numero") int numero){
-        return service.sortearNQuestoes(numero);
+    public Optional<Ano> findByNome(@PathVariable(value = "nome") String nome){
+        return service.findByNome(nome);
     }
-
 
     @RequestMapping(method=RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Questao post(@RequestBody Questao questao){
-        return service.create(questao);
+    public Ano post(@RequestBody Ano ano){
+        return service.create(ano);
     }
 
     @RequestMapping(method=RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Questao put(@RequestBody Questao questao){
-        return service.update(questao);
+    public Ano put(@RequestBody Ano ano){
+        return service.update(ano);
     }
 
     @RequestMapping(value = "/{id}",

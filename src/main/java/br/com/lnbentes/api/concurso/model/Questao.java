@@ -25,13 +25,6 @@ public class Questao{
    @NotNull
    private double peso;
 
-   @NotNull
-   private String ano;
-
-   @NotNull
-   @Column(name = "peso_data")
-   private double pesoData;
-
    @ManyToOne
    @JsonIgnoreProperties("questao")
    private Banca banca;
@@ -43,7 +36,6 @@ public class Questao{
 
    @ManyToOne
    @JsonIgnoreProperties("questao")
-//   @Column(name = "area_de_conhecimento")
    private AreaDeConhecimento areaDeConhecimento;
 
    @ManyToOne
@@ -53,6 +45,10 @@ public class Questao{
    @ManyToOne
    @JsonIgnoreProperties("questao")
    private Cargo cargo;
+
+   @ManyToOne
+   @JsonIgnoreProperties("questao")
+   private Ano ano;
 
 
    public Questao() {
@@ -105,22 +101,6 @@ public class Questao{
       this.explicacao = explicacao;
    }
 
-   public String getAno() {
-      return ano;
-   }
-
-   public void setAno(String ano) {
-      this.ano = ano;
-   }
-
-   public double getPesoData() {
-      return pesoData;
-   }
-
-   public void setPesoData(double pesoData) {
-      this.pesoData = pesoData;
-   }
-
    public double getPeso() {
       return peso;
    }
@@ -167,5 +147,13 @@ public class Questao{
 
    public void setCargo(Cargo cargo) {
       this.cargo = cargo;
+   }
+
+   public Ano getAno() {
+      return ano;
+   }
+
+   public void setAno(Ano ano) {
+      this.ano = ano;
    }
 }

@@ -40,7 +40,7 @@ public class AssuntoService {
      * Retorna uma lista com todos os nomes de assuntos registrados.
      * */
     public List<NomeModel> getAllName(){
-        this.assuntos = repository.findAll();
+        this.assuntos = this.findAll();
         this.nomes = new ArrayList<>();
 
         for (Assunto assunto : assuntos) {
@@ -62,7 +62,7 @@ public class AssuntoService {
      * Pega o nome do assunto e retorna uma lista com todos os nomes dos topicos relacionados.
      * */
     public List<NomeModel> getAllTopicosNomes(String nomeAssunto){
-        Optional<Assunto> assunto = repository.findByNomeContainingIgnoreCase(nomeAssunto);
+        Optional<Assunto> assunto = this.findByNome(nomeAssunto);
         this.nomes = new ArrayList<>();
 
         for(Topico topico : assunto.get().getTopicos()){
