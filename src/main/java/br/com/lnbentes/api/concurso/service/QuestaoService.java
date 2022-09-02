@@ -36,6 +36,12 @@ public class QuestaoService {
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
     }
 
+    /*
+     * Recebe a quantidade de questões de deseja que seja selecionada e depois devolve essa quantidade randomizada.
+     * @author Lucas Bentes
+     * @param int - nome da area de interesse.
+     * @return List<> - questões randomizada.
+     * */
     public List<Questao> sortearNQuestoes(int numeroVezes){
         this.questoes = this.findAll();
         this.numerosSorteados = new ArrayList<>();
@@ -75,16 +81,11 @@ public class QuestaoService {
         Questao entity = repository.findById(questao.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("ID não localizado"));
 
+        entity.setTitulo(questao.getTitulo());
         entity.setDescricao(questao.getDescricao());
         entity.setResposta (questao.isResposta());
         entity.setExplicacao(questao.getExplicacao());
         entity.setPeso(questao.getPeso());
-        entity.setAno(questao.getAno());
-        entity.setBanca(questao.getBanca());
-        entity.setSubTopico(questao.getSubTopico());
-        entity.setOrgao(questao.getOrgao());
-        entity.setCargo(questao.getCargo());
-        entity.setAreaDeConhecimento(questao.getAreaDeConhecimento());
         return repository.save(entity);
     }
 

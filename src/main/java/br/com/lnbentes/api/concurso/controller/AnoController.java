@@ -2,7 +2,6 @@ package br.com.lnbentes.api.concurso.controller;
 
 import br.com.lnbentes.api.concurso.model.Ano;
 import br.com.lnbentes.api.concurso.model.NomeModel;
-import br.com.lnbentes.api.concurso.model.Orgao;
 import br.com.lnbentes.api.concurso.service.AnoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
