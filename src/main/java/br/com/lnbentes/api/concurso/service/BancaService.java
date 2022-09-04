@@ -31,12 +31,12 @@ public class BancaService {
     }
 
     public List<NomeModel> getAllName(){
-        List<Banca> topicos = repository.findAll();
+        List<Banca> bancas = repository.findAll();
         List<NomeModel> nomes = new ArrayList<>();
 
-        for (Banca banca : topicos) {
+        for (Banca banca : bancas) {
             NomeModel nome = new NomeModel();
-            nome.setId(nome.getId());
+            nome.setId(banca.getId());
             nome.setNome(banca.getNome());
             nome.setPeso(banca.getPeso());
             nomes.add(nome);
