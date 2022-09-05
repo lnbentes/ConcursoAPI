@@ -17,6 +17,6 @@ public class CorsConfiguration implements WebMvcConfigurer {
         //liberando app cliente 1
         registry.addMapping("/**")
                 .allowedOrigins("https://concursolnbentes.netlify.app")
-                .allowedMethods("GET", "OPTIONS", "HEAD", "TRACE", "CONNECT");
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
     }
 }
