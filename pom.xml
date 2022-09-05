@@ -14,7 +14,7 @@
 	<name>Concurso</name>
 	<description>API para formular questionario de concurso</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
