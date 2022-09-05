@@ -17,7 +17,7 @@ Com a aplicação rodando, acesse o [link](http://localhost:8080/swagger-ui/inde
 * Questões;
 
 ## End-points:
-
+Verifique na documentação do swagger
 
 ## Tecnologias usadas:
 * Java 11
@@ -25,4 +25,5 @@ Com a aplicação rodando, acesse o [link](http://localhost:8080/swagger-ui/inde
 * Maven
 * Postman
 * MySQL
+* PostgreSQL
 * Swagger
