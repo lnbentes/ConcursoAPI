@@ -9,8 +9,14 @@ public class CorsConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        //LocasHost
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:4200")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
+
+        //liberando app cliente 1
+        registry.addMapping("/**")
+                .allowedOrigins("https://concursolnbentes.netlify.app")
+                .allowedMethods("GET", "OPTIONS", "HEAD", "TRACE", "CONNECT");
     }
 }
